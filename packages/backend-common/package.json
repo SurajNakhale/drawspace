@@ -1,0 +1,25 @@
+{
+  "name": "@repo/backend-common",
+  "version": "1.0.0",
+  "exports": {
+    "./config": "./src/config.ts"
+  },
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -b",
+    "start": "npm run build && node ./dist/config.js",
+    "dev":"npm run build && npm run dev"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^22.15.3"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "zod": "^4.3.6"
+  }
+}
