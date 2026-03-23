@@ -9,7 +9,7 @@ wss.on("connection", (socket, request)=>{
     let url = request.url;
     if(!url){
         return;
-    }
+    } 
 
     const queryParams = new URLSearchParams(url.split("?")[1]);
     const token = queryParams.get('token') || "";
@@ -26,6 +26,6 @@ wss.on("connection", (socket, request)=>{
     }
 
     socket.on("message", (data) => {
-        socket.send("hi teherer");
+        socket.send("hi therer");
     })
 })
