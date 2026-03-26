@@ -128,38 +128,37 @@ app.post("/signin", async (req, res) => {
 
 //create room endpoint
 app.post("/create-room", authMiddleware, async (req, res) => {
-    try{
-            //which user created the room 
-        const userId = (req as any).userId;
-
-        if (!userId){
+    //which user created the room 
+    const userId = (req as any).userId;
+    
+    if (!userId){
         return res.status(401).json({
             message: "Unauthorized"
         });
-        }
-
-        const parsed = roomSchema.safeParse(req.body);
-
-        if (!parsed.success) {
-            return res.status(400).json({
-                message: "Invalid input"
-            })
-        }
-
-        const { slug } = parsed.data;
-
-        
+    }
+    
+    const parsed = roomSchema.safeParse(req.body);
+    
+    if (!parsed.success) {
+        return res.status(400).json({
+            message: "Invalid input"
+        })
+    }
+    
+    const { slug } = parsed.data;
+    
+    try{
         const existing = await prisma.room.findUnique({
             where: { 
                 slug 
             }
         })
 
-            if (existing) {
-                return res.status(409).json({
-                    message: "Room already exists"
-                })
-            }
+        if (existing) {
+            return res.status(400).json({
+                message: "Room already exists"
+            })
+        }
 
         const room = await prisma.room.create({
             data: {
